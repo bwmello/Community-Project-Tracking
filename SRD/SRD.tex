@@ -1,0 +1,253 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Software Requirements Document
+%Created by Blake Eggemeyer 2012 Feb 10 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{verbatim}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{lscape}
+%\usepackage{titlesec}
+\usepackage[table]{xcolor}
+\usepackage{color}
+\definecolor{grey}{RGB}{230,230,230}
+
+
+\usepackage{sectsty}
+\subsubsectionfont{\textbf}
+\paragraphfont{~~~\normalfont\textbf}
+\subparagraphfont{\normalfont}
+\setlength{\parskip}{-0.0cm}
+
+
+\usepackage[T1]{fontenc}
+
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\rmdefault}{phv}
+\renewcommand{\ttdefault}{pcr}
+
+
+
+\setlength{\parindent}{0pt}
+
+
+\topmargin 0in
+\headheight 0in
+\headsep 0in
+\textheight 9.5in
+\textwidth 6in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 7pt
+\headsep 0in
+\footskip .9in
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\begin{flushright} 
+% Title
+{\LARGE \bfseries Software Requirements Document}\\[1.2cm]
+{\large \bfseries for}\\[1.2cm]
+{\huge \bfseries Community Project Tracking}\\[1.2cm]
+{\large \bfseries CS 472}\\
+\vfill
+{\large \bfseries Draft 0.2}\\[2cm]
+\emph{Prepared by:} \\
+Tim Grediagin\\
+Devin Jones\\
+Brent Mello\\
+Blake Eggemeyer \\ [3cm]
+% Bottom of the page
+{\large \today}
+\\[2cm]
+\end{flushright}
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{4}
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+\subsection{Purpose}
+This Software Requirements Document for Community Project Tracking (CPT) is for use by the customer and development team. This document is a formal listing of the functional and non-functional requirements of the Community Project Tracking software.
+
+\subsection{Scope}
+The Community Project Tracking software will assist users in the storing and summary of various activity data.
+
+\subsection{Definitions}
+
+\paragraph{GUI:} Acronym for Graphical User Interface. Used to refer to the look and feel the user experiences.
+\paragraph{Immediately:} Immediately refers to actions that will begin as soon as the user has given the input for the action to occur.
+\paragraph{Should:} Requirements with this marker are desired, but not crucial, and will be a part of the final deliverable contingent on time and progress.
+\paragraph{Client:} Julie Engfer, the Office Manager for Festival of Fairbanks.
+\paragraph{User:} The person, or persons, who operate or interact directly with the CPT.
+\paragraph{Administrator:} A user with special permissions as specified in section 3.1.2 User Management. Also referred to as Admin.
+\paragraph{Will:} Requirements with this marker are guaranteed to be in the final delivered product.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{CPT:} The name of this application.
+%\paragraph{User:} A person who uses the software directly. All users will have individual login accounts.
+%any alternatives to 'worker'
+\paragraph{Worker:} The person(s) responsible for the hours worked in a Project. Users are also Workers, but there may be Workers that are not Users, e.g., "boyscouts."
+\paragraph{Project:} Seen at top of timesheet, e.g., "Bicycle Path."
+\paragraph{Program:} A project which occurs annually, e.g., "Clean Team."
+\paragraph{Activity:} The specific type of work a Worker does, e.g., "Ice Chipping."
+\paragraph{Location:} The place where an activity is done, e.g., "CORE 1st - 3rd."
+%one or the other?
+\paragraph{Tool/Equipment:} The implement used to complete an Activity. Corresponds to "Equipment Used" on the original timesheet.
+\paragraph{Comment:} A remark a User may optionally provide on the timesheet.
+\paragraph{Timesheet:} The name for the web page on which the various data are entered.
+
+
+\subsection{References}
+Written with the IEEE Recommended Practice for Software Requirements Specifications as a reference and guide. The Tsunami SWR and RPC Donor SWR were referenced to find appropriate wording for some sections.
+%\subsection{Overview}
+
+\subsection{Revision tracking:}
+%\rowcolors{1}{grey}{white}
+\begin{tabular}{|l|r|p{5in}|}
+\hline
+0.1 & Feb 10 & Document constructed.\\
+\hline
+0.2 & April 26 & Submitted for Review.\\
+\hline
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overall description}
+\subsection{Product functions}
+
+\rowcolors{1}{grey}{white}
+\begin{tabular}{l | l p{5.25in}}
+\multicolumn{3}{c}{Priority List}\\
+1 &\ref{sec:Data Storage}		& Store data regarding operations \\
+2 &\ref{sec:Reports}			& Generate summary reports of the data that has been gathered\\
+3 &\ref{sec:Users}				& Manage user accounts\\
+4 &\ref{sec:Security}			& Prevent unauthorized viewing or modifying of data. \\
+5 &\ref{sec:Interface}			& Highly usable interface\\ 
+6 &\ref{sec:Backups}			& Prevent loss or corruption of data\\
+7 &\ref{sec:Platform}			& Runs on existing platform\\
+\end{tabular}
+
+\subsection{User Characteristics}
+The CPT is intended to have a narrow user-base with a small number of administrators and a small number of users.
+
+\subsection{Constraints}
+
+
+\subsection{Assumptions and Dependencies}
+\begin{enumerate}
+\item \textbf{Language:} The interface for the user is in English.
+\end{enumerate}
+
+\subsection{Apportioning of requirements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Specific requirements}
+The requirements are listed and ordered in a priority list so that their order can be changed at a later date without the section numbers needing to be changed and to allow listing of the priorities in one location.\\
+\\
+
+\begin{comment}
+The first 2 are to be considered absolutely critical. The software cannot be considered useful if those features are absent.
+
+What are the security implications of storing identifiable time sheet info for employees??
+\end{comment}
+
+\subsection{Functional requirements}
+
+\subsubsection{User Management}\label{sec:Users}
+\paragraph{} The CPT will have two levels of accounts: general Users and Admins. Everything a User can do can be done by an Admin.
+\paragraph{} Accounts will require password authentication.
+\paragraph{} The CPT will ship with one Admin account.
+\paragraph{} Admins will be able to create other Admin and User accounts.
+\paragraph{} Admins will be able to reset User passwords.
+\paragraph{} Users will be able to change their own password.
+
+%do this?
+%\subsubsection{Project Management}\label{sec:Project Management}
+%\paragraph{} Admins will be able to create and delete Projects/Programs.
+%\paragraph{} Admins will be able to select which Locations will appear on this Project/Program's timesheet.
+%\paragraph{} Admins will be able to select which Activities will appear on this Project/Program's timesheet.
+
+\subsubsection{Data Management}\label{sec:Data Management}
+\paragraph{} Admins will be able to create, modify, and delete Projects/Programs.
+\paragraph{} Admins will be able to create, modify, and delete Locations.
+\paragraph{} Admins will be able to create, modify, and delete Activities.
+\paragraph{} Admins will be able to create, modify, and delete Tools.
+\paragraph{} Admins will be able to create, modify, and delete Workers.
+
+\subsubsection{Timesheets}\label{sec:Timesheets}
+\paragraph{} For a Project/Program on a given day, a User will be able to submit the hours worked with each Tool for each Activity for each Location.
+\paragraph{} Users will optionally be able to provide a comment for a Project/Program on a given day.
+\paragraph{} Admins will be able to submit hours on behalf of a given Worker.
+\paragraph{} Users will be able to browse their previously submitted Timesheets.
+\paragraph{} Admins will be able to view and edit the Timesheets of any User.
+\paragraph{} When viewing timesheets, the weather for the day will be displayed.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=6.5in]{"PaperCopy"}
+\caption{Example of former timesheet}
+\label{fig:timesheet}
+\end{center}
+\end{figure}
+%finding it convenient to use the word "Timesheet" here.  Need to redo the definition if we stick with this.
+
+\subsubsection{Reports}\label{sec:Reports}
+%\paragraph{} The CPT will use the daily input data to generate reports as described by the client. %Too abstract?
+\paragraph{} For a given Project/Program over a given time period, Admins will be able to see the total hours worked with each Tool for each Activity for each Location.
+ 
+\subsubsection{Data Storage}\label{sec:Data Storage}
+\paragraph{} All data entered into the CPT will be saved to disk.
+
+%how are groups handled
+
+\subsubsection{Security}\label{sec:Security}
+\paragraph{} The CPT will have preventative measures against the unauthorized viewing or modifying of stored data.
+
+\subsubsection{Backups}\label{sec:Backups}
+\paragraph{} The ability to create and store copies of the task data must be considered.
+
+\subsection{Non-functional requirements}
+\subsubsection{Interface}\label{sec:Interface}
+\paragraph{} The GUI of the CPI will be user friendly for users operating from standard computers, smart phones, and tablet devices.
+\paragraph{} The CPI will be able to display the local weather for a given day.
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=6.5in]{"CPTWorkexamples"}
+\caption{Diagram of user workflow}
+\label{fig:dia}
+\end{center}
+\end{figure}
+
+
+
+\subsubsection{Platform}\label{sec:Platform}
+Several existing platforms are available. One of which is on site at the clients offices running a Windows 2003 server. The others are a few off site servers that are used for a number of different projects.
+
+\subsection{Performance requirements}
+The software must store the input data for the duration necessary to create reports on the data.
+
+\subsection{Software system attributes}
+
+\end{document}
+
+
+

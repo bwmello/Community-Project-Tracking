@@ -1,0 +1,53 @@
+!!! 5
+%html
+	%head
+		%title Login
+		%g:javascript(library='jquery')/
+		%r:require(module='cpt')/
+		%r:layoutResources/
+	%body
+		%header#header
+			%ul
+				%li.ui-tabs-selected.ui-state-active
+					%g:link(controller='login' action='login')
+						Login
+		.main
+			%h1.ui-widget-header.ui-corner-all
+				Please Login
+			%form#loginForm.ui-widget.ui-widget-content.ui-corner-all(action='${postUrl}' method='POST' name='loginForm')
+				%input(type='hidden' name='ajax' value='true')/
+				%fieldset.table
+					.row
+						.cell
+							%label(for='username') Username
+						.cell
+							.required-indicator
+						.cell
+							%input#username(type='text' autofocus='true' name='j_username')
+					.row
+						.cell
+							%label(for='password') Password
+						.cell
+							.required-indicator
+						.cell
+							%input#password(type='password' name='j_password')
+					.row
+						.cell
+							%label(for='rememberMe') Remember me
+						.cell
+							.required-indicator
+						.cell
+							%input#rememberMe(type='checkbox' name='${rememberMeParameter}')/
+				.buttons
+					%input.jq-button(type='submit' value='Login' onclick='ajaxLogin();return false')
+					
+		<%-- allow ajax submit --%>
+		:javascript
+			function ajaxLogin() {
+				var form = $('#loginForm')
+				$.post(form.attr('action'), form.serialize(), function(data, textStatus, jqXHR){
+					if (data.error) alert(data.error + '\nTODO: Get rid of this popup.')
+					else if (data.success) $(document).ajaxStop(function() { location.reload(true); });
+				})
+			}
+		%r:layoutResources/

@@ -1,0 +1,202 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 12pt;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+	margin: 0;
+}
+
+h1 {
+	font-size: 2em;
+	margin-bottom: .5em;
+	padding: .125em;
+	padding-left: .25em;
+}
+h2 {
+	font-size: 1.8em;
+	margin-bottom: .556em;
+	padding: .139em;
+	padding-left: .278em;
+}
+
+h3  {
+	font-size: 1.65em;
+	margin-bottom: 0.606em;
+	padding: 0.152em;
+	padding-left: 0.303em;
+}
+
+h4 {
+	font-size: 1.5em;
+	margin-bottom: 0.667em;
+	padding: 0.167em;
+	padding-left: 0.333em;
+}
+
+h5 {
+	font-size: 1.35em;
+	margin-bottom: 0.741em;
+	padding: 0.185em;
+	padding-left: 0.37em;
+}
+
+h6 {
+	font-size: 1.2em;
+	margin-bottom: 0.833em;
+	padding: 0.208em;
+	padding-left: 0.417em;
+}
+
+ul {
+	margin: 0;
+/*	padding: 0;
+	list-style-type: none;*/
+}
+
+fieldset {
+	margin: 0;
+	padding: 0;
+	border: none;
+}
+
+.table {display:table;}
+.row {display:table-row;}
+.cell {display:table-cell; padding-top:1em; vertical-align:top;}
+.cell:first-child {padding-left:1em;}
+.cell:last-child {padding-right:1em;}
+.cell div {padding: 5px 0;}
+.cell .required-indicator {width:30px; text-align: center;}
+.cell label {display:block; text-align:right; padding:5px 0;}
+.cell.r div {padding-left: 33px}
+
+fieldset .cell input[type=text], fieldset .cell input[type=password] {width: 20em;}
+fieldset .cell textArea {width: 20em;height:5em;}
+
+#header.ui-tabs {
+	padding: 0;
+}
+
+#header.ui-tabs ul {
+	padding-left: 1em;
+}
+
+#header.ui-tabs a {
+	cursor: pointer;
+}
+
+.subnav {
+	padding: 1em 0 0 2em;
+	border-bottom: 1px solid #ccc;
+	margin: 0 1em;
+}
+
+.subnav ul{
+	font-size: .9em;
+	list-style-type: none;
+	padding: 0;
+	margin-bottom: -1px;
+}
+
+.subnav li {
+	display: inline-block;
+	marginright: 1em;
+}
+
+.subnav a {
+	margin-bottom: 7px;
+}
+
+.subnav a.jq-active-button {
+	border: 1px solid #ccc;
+	border-bottom: 1px solid white;
+	border-bottom-left-radius: 0;
+	border-bottom-right-radius: 0;
+	padding-bottom: 7px;
+	margin-bottom:0;
+}
+
+.main {padding:1em;}
+
+.ui-widget-content {
+	margin-bottom:1em;
+}
+
+*.ui-helper-hidden {display:none;}
+
+.ui-state-error {
+	padding: .5em;
+	margin-bottom: 1em;
+}
+
+.ui-state-highlight {
+	padding: .5em;
+}
+
+table.list {
+	width: 100%;
+	border-spacing: 0;
+}
+
+table.list th,
+table.list td {
+	padding: .5em;
+	text-align: left;
+}
+
+table.list thead tr {
+	background-color: #bbb;
+}
+
+table.list tr.odd {
+	background-color: #eee;
+}
+
+.pagination {
+	text-align: center;
+	padding: .5em;
+}
+
+.pagination a, .pagination .currentStep {
+	display: inline-block;
+	padding: .25em .5em;
+	text-decoration: none;
+	color: black;
+	margin:0 .25em;
+}
+
+.pagination .currentStep {
+	border: 1px solid black;
+}
+
+.pagination a:hover, .pagination a:focus {
+	text-decoration: underline;
+}
+
+.buttons {
+	border:none;
+	margin: 1em;
+}
+.rwbutton {width:6em;}
+.deletebutton {float:right;}
+
+.error input, .error select, .error textarea{
+	border-color: red;
+}
+
+.timesheet {display:inline-block;margin:1em 1em 0 1em;}
+.timesheet .name {text-align:center}
+.timesheet table{
+	border-collapse: collapse;
+}
+.timesheet th, .timesheet td {
+	border: 1px solid black;
+}
+.timesheet th:first-child {border-width: 0 2px 2px 0;}
+.timesheet .location {width:10em;border-bottom-width:2px;}
+.timesheet .activity {padding:.25em;border-right-width:2px;}
+
+.timesheet td input {text-align:right;}

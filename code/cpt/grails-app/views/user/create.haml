@@ -1,0 +1,59 @@
+!!! 5
+%html
+	%head
+		%g:set(var="className" value="user")/
+		%g:set(var="entityName" value="${message(code: className+'.label')}")/
+		%title
+			%g:message(code="default.create.label" args="[entityName]")/
+	%body
+		.subnav
+			%ul
+				%li
+					%g:link.jq-button(controller='worker' action='list')
+						%g:message(code="worker.labels")/
+				%li
+					%g:link.jq-button(controller='user' action='list')
+						%g:message(code="user.labels")/
+				%li
+					%g:link.jq-button.jq-active-button(action='create')
+						%g:message(code="default.new.label" args="[entityName]")/
+		.main
+			%h1.ui-widget-header.ui-corner-all
+				%g:message(code="default.create.label" args="[entityName]")/
+			%cpt:errors(bean="${instance}")
+			%g:form.ui-widget.ui-widget-content.ui-corner-all(action="create")
+				%fieldset.table
+					.row.required(class="${hasErrors(bean: instance, field: 'username', 'error')}")
+						.cell
+							%label(for="username")
+								%g:message(code="user.username.label" default="Username")/
+						.cell
+							.required-indicator *
+						.cell
+							%g:textField(name="username" required="" value="${instance?.username}")/
+					.row.required(class="${hasErrors(bean: instance, field: 'password', 'error')}")
+						.cell
+							%label(for="password")
+								%g:message(code="user.password.label" default="Password")/
+						.cell
+							.required-indicator *
+						.cell
+							%g:passwordField(name="password" required="")/
+					.row.required
+						.cell
+							%label(for="password2")
+								Retype
+								%g:message(code="user.password.label" default="Password")/
+						.cell
+							.required-indicator *
+						.cell
+							%input(type="password" id="password2" name="password2" required="")/
+					.row(class="${hasErrors(bean: instance, field: 'type', 'error')}")
+						.cell
+							%label(for="type")
+								%g:message(code="user.type.label" default="Type")/
+						.cell
+							.required-indicator *
+						.cell
+							%g:select(name="type" from="${instance.constraints.type.inList}" value="${instance?.type}" valueMessagePrefix="user.type")/
+				%cpt:fieldsetCreate/

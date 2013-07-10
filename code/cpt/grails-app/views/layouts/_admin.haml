@@ -1,0 +1,24 @@
+%header#header
+	%ul
+		%li
+			%g:link(controller='home' action='home')
+				Home
+		%li
+			%g:link(controller='report' action='home')
+				Reports
+		%li
+			%g:link(controller='project' action='list')
+				Projects
+		%li
+			%g:link(controller='timesheet' action='list')
+				Timesheets
+		%li
+			%g:link(controller='activity' action='list')
+				Data
+		%li
+			%g:link(controller='user' action='list')
+				People
+		%li(style="float:right")
+			%g:link(controller='logout')
+				Logout
+				%sec:username/

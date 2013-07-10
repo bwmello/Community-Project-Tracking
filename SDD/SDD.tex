@@ -1,0 +1,368 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Software Design Document
+%Created by Blake Eggemeyer 2012 Feb 16 
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[12pt]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+\usepackage{verbatim}
+\usepackage{hyperref} % links
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{ulem}%strikethrough
+
+\usepackage{lscape}
+%\usepackage{titlesec}
+\usepackage{rotating} % text in tables
+
+% table colors
+\usepackage[table]{xcolor}
+\usepackage{color}
+\definecolor{grey}{RGB}{230,230,230}
+
+% make paragraphs less important looking
+\usepackage{sectsty}
+\subsubsectionfont{\textbf}
+\paragraphfont{~~~\normalfont\textbf}
+\subparagraphfont{\normalfont}
+
+\usepackage[T1]{fontenc}
+
+\renewcommand{\sfdefault}{phv}
+\renewcommand{\rmdefault}{phv}
+\renewcommand{\ttdefault}{pcr}
+
+\renewcommand{\c}{\checkmark}
+
+%type face for code and such things
+\newcommand{\e}[1] {{\tt #1}}
+%used in table
+\newcommand{\s}[1] {\begin{sideways}#1\end{sideways}}
+
+\setlength{\parindent}{0pt}
+
+\topmargin 0in
+\headheight 0in
+\headsep 0in
+\textheight 8.5in
+\textwidth 6in
+\oddsidemargin 0in
+\evensidemargin 0in
+\headheight 7pt
+\headsep 0in
+\footskip .7in
+
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\begin{flushright} 
+% Title
+{\LARGE \bfseries Software Design Document}\\[1.2cm]
+{\large \bfseries for}\\[1.2cm]
+{\huge \bfseries Community Project Tracking}\\[1.2cm]
+{\large \bfseries CS 472}\\
+\vfill
+{\large \bfseries Draft 0.2}\\[2cm]
+\textit{Prepared by:} \\
+Tim Grediagin\\
+Devin Jones\\
+Brent Mello\\
+Blake Eggemeyer \\ [3cm]
+% Bottom of the page
+{\large \today}
+\\[2cm]
+\end{flushright}
+\end{titlepage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%http://en.wikipedia.org/wiki/Traceability_matrix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+
+\subsection{Overview}
+This document is intended to be used by the developer of the TODO software.
+
+\subsection{Stakeholders}
+The stakeholder in the design is also the client.
+
+\subsection{Definitions}
+\setcounter{paragraph}{0}
+\setcounter{subsubsection}{0}
+\paragraph{Should:} Requirements with this marker are desired, but not crucial, and will be a part of the final deliverable contingent on time and progress.
+\paragraph{User:} The person, or persons, who operate or interact directly with the product.
+\paragraph{Will:} Requirements with this marker are guaranteed to be in the final delivered product.
+\paragraph{Item:} Item refers to a data object. This object is either an appointment or a task.
+\paragraph{CSV:} CSV is an acronym for Comma Separated Value. This is a standard and common format of simple tabular data.
+
+\paragraph{GUI:} Acronym for Graphical User Interface. Used to refer to the look and feel the user experiences.
+\paragraph{Immediately:} Immediately refers to actions that will begin as soon as the user has given the input for the action to occur.
+\paragraph{Client:} Julie Engfer, the Office Manager for Festival of Fairbanks.
+\paragraph{Administrator:} A user with special permissions as specified in section 3.1.2 User Management.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\paragraph{CPT:} The name of this application.
+%\paragraph{User:} A person who uses the software directly. All users will have individual login accounts.
+%any alternatives to 'worker'
+\paragraph{Worker:} The person(s) responsible for the hours worked in a Project. Users are also Workers, but there may be Workers that are not Users, e.g., "boyscouts."
+\paragraph{Project:} Seen at top of timesheet, e.g., "Bicycle Path."
+\paragraph{Program:} A project which occurs annually, e.g., "Clean Team."
+\paragraph{Activity:} The specific type of work a Worker does, e.g., "Ice Chipping."
+\paragraph{Location:} The place where an activity is done, e.g., "CORE 1st - 3rd."
+%one or the other?
+\paragraph{Tool/Equipment:} The implement used to complete an Activity. Corresponds to "Equipment Used" on the original timesheet.
+\paragraph{Comment:} A remark a User may optionally provide on the timesheet.
+\paragraph{Timesheet:} The name for the web page on which the various data are entered.
+
+\subsection{References}
+The {\tt 1998 - IEEE Standard for Information Technology -- Systems Design -- Software Design Descriptions} was referenced to produce this document.
+
+\subsection{Revision tracking}
+\begin{tabular}{|l|r|p{4.6in}|}
+\hline
+0.1 & Feb 16 & Empty document created.\\
+\hline
+0.3 & March 2 & Section 1.3 Definitions rough draft completed.\\
+\hline
+0.5 & March 8 & Section 2 Design Considerations rough draft completed.\\
+\hline
+0.6 & March 20 & Domains and Controller sections prototyped.\\
+\hline
+0.7 & April 10 & Site diagram added to Section 6 Interface.\\
+\hline
+0.8 & April 26 & Submitted for review.\\
+\hline
+0.9 & May 3 & Revision history added from Github log.\\
+\hline
+0.95 & May 5 & Slight formatting changes following document review.\\
+\hline
+1.0 & May 7 & Submitted for final review.\\
+\hline
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Design Considerations}
+
+\subsection{Programming Languages}
+The project will be completed using Groovy on Grails to produce a java web application. 
+
+\subsection{Database}
+The H2 database manager is the default database manager used by Grails and according to information from \href{http://database-management-systems.findthebest.com/compare/16-30/H2-vs-MySQL}{third parties} is sufficient to handle the task necessary.
+
+\subsection{Project Management}
+This project will use \e{Git} version control in conjunction with \e{GitHub} to keep track of changes. The repository can be reached at \url{https://github.com/blake6489/Community-Project-Tracking}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Domains}\label{sec:Domains}
+\subsection{User}\label{sec:DUser}
+There will be two types of user accounts: admin and employee. Both types of accounts will have unique usernames and passwords. Employee accounts will have the following permissions: fill in and submit the current time sheet, and view past timesheets submitted by that specific account. Admin accounts will have the following permissions: create/delete admin or employee accounts, view usernames and passwords of all accounts, view and edit all submitted timesheets, create and submit timesheets on behalf of volunteer group, and access to automated report generation.
+
+\setcounter{paragraph}{0}
+\subsection{Activity}\label{sec:DActivity}
+\paragraph{constraints} Sets constraints for name and uniqueName variables.
+\paragraph{name} Max of 250 characters, alphanumeric and spaces.
+\paragraph{uniqueName} Max of 250 characters, alphanumeric and spaces set to lower case.
+\paragraph{setName} Sets both variables and makes uniqueName's characters lower case.
+
+\setcounter{paragraph}{0}
+\subsection{Location}\label{sec:DLocation}
+\paragraph{constraints} Sets constraints for name and uniqueName variables.
+\paragraph{name} Max of 250 characters, alphanumeric and spaces.
+\paragraph{uniqueName} Max of 250 characters, alphanumeric and spaces  set to lower case.
+\paragraph{setName} Assigns values for name and uniqueName variables and makes uniqueName's characters lower case.
+
+\setcounter{paragraph}{0}
+\subsection{Project}\label{sec:DProject}
+\paragraph{constraints} Sets constraints for project name variable.
+\paragraph{name} 250 characters, alphanumeric and spaces.
+\paragraph{hasMany} Initializes hasMany variable to the Timesheet template.
+
+\setcounter{paragraph}{0}
+\subsection{Role}\label{sec:DRole}
+\paragraph{constraints} Sets constraints for authority variable.
+\paragraph{mapping} Sets the use of cache to true.
+\paragraph{authority} Specifies if worker account or admin account (ex: ROLE_ADMIN).
+\paragraph{type} A printable representation of authority (ex: admin).
+
+\setcounter{paragraph}{0}
+\subsection{Timesheet}\label{sec:DTimesheet}
+\paragraph{constraints} Sets constraints for date, project, template, and worker variables.
+\paragraph{hasMany} Initializes hasMany variable to the workRecord record.
+\paragraph{date} The date of the timesheet.
+\paragraph{project} The project the timesheet belongs to.
+\paragraph{template} The template for the timesheet.
+\paragraph{worker} The worker associated with the timesheet.
+
+\setcounter{paragraph}{0}
+\subsection{Tool}\label{sec:DTool}
+\paragraph{constraints} Sets constraints for name and uniqueName variables.
+\paragraph{name} 250 characters, alphanumeric and spaces.
+\paragraph{uniqueName} 250 characters, alphanumeric and spaces  set to lower case.
+\paragraph{setName} Assigns values for name and uniqueName variables and makes uniqueName's characters lower case.
+
+\setcounter{paragraph}{0}
+\subsection{User}\label{sec:DUser}
+\paragraph{beforeInsert} Function called by insert function. Encodes the password as it is inserted.
+\paragraph{beforeUpdate} Function called by update function. Checks if the password needs to be encoded.
+\paragraph{constraints} Sets constraints for username, uniqueUsername, password, type, and worker.
+\paragraph{createWithUserRole} Creates a user with a userRole. Same purpose as the save() function in the controllers.
+\paragraph{encodePassword} Changes password variable to encoded form of the password.
+\paragraph{password} The password for the user account.
+\paragraph{setUsername} Assigns values for username and uniqueUsername variables and makes uniqueName's characters lower case.
+\paragraph{type} Either 'user' or 'admin'.
+\paragraph{uniqueUsername} The same value as the username variable, only set to lower case.
+\paragraph{username} Validates that username has a unique object id.
+%\paragraph{worker} I have no idea where this variable is used.
+
+\setcounter{paragraph}{0}
+\subsection{Worker}\label{sec:DWorker}
+\paragraph{constraints} Sets constraints for name variable.
+\paragraph{name} The first and last name of the worker.
+
+\setcounter{paragraph}{0}
+\subsection{Work Record}\label{sec:DWork Record}
+\paragraph{mapping} Assigns identifiable names to the indices of the variables: project, timesheet, worker, and date.
+
+\section{Controllers}\label{sec:Controllers}
+
+\subsection{Activity}\label{sec:CActivity}
+\paragraph{create} Creates activity object with get request. Saves existing activity with post request.
+\paragraph{delete} Calls activity object's destructor.
+%\paragraph{edit} No edit function found in ActivityController.groovy, so commented out.
+\paragraph{index} Redirects to list() function.
+\paragraph{list} Returns the parameters of the activity object and the activity's total count.
+\paragraph{save} Stores activity object in database and updates activity's total count.
+\paragraph{show} Fetches parameters of activity object with get request. Calls update() with post request.
+\paragraph{update} Changes activity object's parameters.
+
+\subsection{Home}\label{sec:CHome}
+\paragraph{grails} Renders the appropriate home page for the user/admin.
+\paragraph{home} Redirects user to either adminHome or userHome based on the account/role being used.
+%\paragraph{index} An empty function in HomeController.groovy, so commented out.
+
+\subsection{Location}\label{sec:CLocation}
+\paragraph{create} Creates location object with get request. Saves existing location with post request.
+\paragraph{delete} Calls location object's destructor.
+%\paragraph{edit} No edit function found in LocationController.groovy, so commented out.
+\paragraph{index} Redirects to list() function.
+\paragraph{list} Returns the parameters of the location object and the location's total count.
+\paragraph{save} Stores location object in database and updates location's total count.
+\paragraph{show} Fetches parameters of location object with get request. Calls update() with post request.
+\paragraph{update} Changes location object's parameters.
+
+\subsection{Login}\label{sec:CLogin}
+\paragraph{ajaxDenied} Renders message for when the redirect url is denied.
+\paragraph{ajaxSuccess} Renders message for when the redirect url is accepted.
+\paragraph{authfail} Serves as the callback for a failed login. Redirects to the authentication page with the appropriate warning message (ex: springSecurity.errors.login.expired).
+\paragraph{denied} Redirects to the login denied page.
+\paragraph{index} Redirects to login() function.
+\paragraph{full} Renders login page for browsers with password remembering cookie.
+\paragraph{login} Renders login page for browsers without password remembering cookie.
+
+\subsection{Logout}\label{sec:CLogout}
+\paragraph{index} Redirects to the Spring security logout uri.
+
+\subsection{Project}\label{sec:CProject}
+\paragraph{create} Creates project object with get request. Saves existing project with post request.
+\paragraph{delete} Calls project object's destructor.
+%\paragraph{edit} No edit function found in ProjectController.groovy, so commented out.
+\paragraph{index} Redirects to list() function.
+\paragraph{list} Returns the parameters of the project object and the project's total count.
+\paragraph{save} Stores project object in database and updates project's total count.
+\paragraph{show} Fetches parameters of project object with get request. Calls update() with post request.
+\paragraph{update} Changes project object's parameters.
+
+\subsection{Tool}\label{sec:CTool}
+\paragraph{create} Creates tool object with get request. Saves existing tool with post request.
+\paragraph{delete} Calls tool object's destructor.
+%\paragraph{edit} No edit function found in ToolController.groovy, so commented out.
+\paragraph{index} Redirects to list() function.
+\paragraph{list} Returns the parameters of the tool object and the tool's total count.
+\paragraph{save} Stores tool object in database and updates tool's total count.
+\paragraph{show} Fetches parameters of tool object with get request. Calls update() with post request.
+\paragraph{update} Changes tool object's parameters.
+
+\subsection{User}\label{sec:CUser}
+\paragraph{create} Creates user object with get request. Saves existing user with post request.
+%\paragraph{delete} Delete function left blank.
+%\paragraph{edit} No edit function found in ToolController.groovy, so commented out.
+\paragraph{index} Redirects to list() function.
+\paragraph{list} Sets user parameters min to 10 and max to 100. Returns the parameters of the user object and the user's total count.
+\paragraph{resetPassword} Changes user's login password or displays appropriate error message.
+\paragraph{save} Validates user's password and sets instance variables (ex: accountExpired = false).
+\paragraph{show} If logged in, lists the parameters of the logged in user.
+%\paragraph{update} Update function left blank.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+\section{Views}
+\subsection{Layouts}
+Layouts are application-wide views not tied to any specific controller. Layouts will be in the "views/layouts" folder.
+\subsubsection{application}
+This is the application-wide layout. It's responsible for deciding what layout templates to render based on user access levels.
+It must also render flash messages to alleviate other views from having to do so.
+\subsubsection{\_login}
+This template renders when the user hasn't logged in. It'll contain an ajax form allowing the user to login.
+Once the user has successfully logged in, the page will refresh.
+\subsubsection{\_admin}
+This template renders when an admin is logged in. It'll contain links to parts of the application admins can access.
+\subsubsection{\_user}
+This template renders when a non-admin is logged in. Not sure what it'll show.
+
+
+\section{Interface}\label{sec:Interface}
+\begin{figure}[H]
+\begin{center}
+\includegraphics[width=7in]{"CPTSiteDiagram"}
+\caption{Diagram of user  travel through site}
+\label{fig:dia}
+\end{center}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Test Cases} No test cases, commenting this out. -Brent
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Traceability matrix}
+\begin{center}
+\begin{tabular}{|l||*{12}{c|}|*{4}{c|}}
+\hline
+\multicolumn{1}{|c||}{ }&
+\multicolumn{6}{|c||}{Functional} &
+\multicolumn{2}{|c|}{Non-functional}\\
+\hline
+	& \s{3.1.1} & \s{3.1.2}&\s{3.1.3}&\s{3.1.4}&\s{3.1.5}&\s{3.1.6}&\s{3.2.1}&\s{3.2.2} \\
+\hline
+~\ref{sec:DActivity}	&&&&&&&&\\
+~\ref{sec:DLocation}	&&&&&&&&\\
+~\ref{sec:DProject}		&&&&&&&&\\
+~\ref{sec:DRole}		&\c&&&&&&&\\
+~\ref{sec:DTimesheet}	&&&&&&&&\\
+~\ref{sec:DTool}		&&&&&&&&\\
+~\ref{sec:DUser}		&\c&&&&&&&\\
+~\ref{sec:DWorker}		&\c&&&&&&&\\
+~\ref{sec:DWork Record}	&&&&&&&&\\
+\hline
+~\ref{sec:CActivity}	&&&&&&&&\\
+~\ref{sec:CHome}		&&&&&&&&\\
+~\ref{sec:CLocation}	&&&&&&&&\\
+~\ref{sec:CLogin}		&\c&&&&&&&\\
+~\ref{sec:CProject}		&&&&&&&&\\
+~\ref{sec:CTool}		&&&&&&&&\\
+~\ref{sec:CUser}		&\c&&&&&&&\\
+\hline
+\end{tabular}
+\end{center}
+
+\end{document}
+
